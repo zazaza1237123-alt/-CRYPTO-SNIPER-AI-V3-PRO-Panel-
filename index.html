@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1426"><title>CRYPTO SNIPER AI V3 PRO</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1426;--panel:#13233d;--line:#294263;--muted:#9fb1ca;--txt:#edf4ff;--blue:#75aaff;--green:#3bd69a;--red:#ff6d7d}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#12294a,#081322 70%);color:var(--txt);font:16px -apple-system,BlinkMacSystemFont,Arial,sans-serif;padding:22px 14px 50px}
+main{max-width:900px;margin:auto}h1{font-size:clamp(24px,6vw,38px);margin:0 0 8px}h2{font-size:20px;margin:0 0 16px}.sub,.muted{color:var(--muted)}.pill{display:inline-block;border:1px solid #496b95;border-radius:30px;padding:8px 13px;color:#bad3f5;font-size:12px;letter-spacing:.06em;margin:12px 0 20px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.card{background:#13233ddd;border:1px solid var(--line);border-radius:18px;padding:17px;min-width:0}.metric{font-size:clamp(22px,5vw,30px);font-weight:750;margin:8px 0}.muted{font-size:14px}.section{margin-top:18px}.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+select,button{background:#09172a;color:var(--txt);border:1px solid #355477;border-radius:12px;padding:13px;font-size:16px}select{width:100%;margin:8px 0 12px}button{cursor:pointer;font-weight:650}button.primary{background:#1d5c9e;border-color:#4c91d5}button:disabled{opacity:.5}
+.pricegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.price{background:#09172a;border:1px solid #294766;border-radius:14px;padding:13px}.price strong{display:block;font-size:24px;margin-top:8px;overflow-wrap:anywhere}
+.signal{font-size:22px;font-weight:800}.green{color:var(--green)}.red{color:var(--red)}.blue{color:var(--blue)}
+canvas{width:100%;height:210px;background:#09172a;border-radius:14px;border:1px solid #294766}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;padding:10px 5px;border-bottom:1px solid #294263}th{color:var(--muted)}
+.note{font-size:13px;line-height:1.5;color:var(--muted)}#status{font-weight:700}.actions{display:flex;gap:9px;flex-wrap:wrap}.actions button{flex:1}
+@media(max-width:520px){body{padding:18px 12px 40px}.grid{gap:9px}.card{padding:14px}.metric{font-size:22px}.pricegrid{gap:8px}}
+</style></head>
+<body><main>
+<h1>⚡ CRYPTO SNIPER AI <span class="blue">V3 PRO</span></h1>
+<div class="sub">Panel de análisis de mercado y simulación de operaciones</div>
+<div class="pill">PAPER TRADING · SIN DINERO REAL</div>
+<div class="grid">
+ <section class="card"><div class="muted">Capital ficticio</div><div class="metric" id="balance">1,000.00 USDT</div><div class="muted">Cuenta de demostración</div></section>
+ <section class="card"><div class="muted">P&amp;L realizado</div><div class="metric" id="realized">+0.00 USDT</div><div class="muted">Operaciones cerradas</div></section>
+ <section class="card"><div class="muted">Riesgo configurado</div><div class="metric">0.50%</div><div class="muted">Del capital disponible</div></section>
+ <section class="card"><div class="muted">Operaciones cerradas</div><div class="metric" id="closed">0</div><div class="muted" id="wins">Aciertos: —</div></section>
+</div>
+<section class="card section">
+ <div class="row"><h2>Mercado en vivo</h2><span class="pill" id="status">CONECTANDO…</span></div>
+ <label class="muted" for="asset">Activo</label>
+ <select id="asset"><option value="BTCUSDT">BTC / USDT</option><option value="ETHUSDT">ETH / USDT</option><option value="SOLUSDT">SOL / USDT</option></select>
+ <div class="pricegrid"><div class="price"><span class="muted">Último precio</span><strong id="price">—</strong></div><div class="price"><span class="muted">Cambio 24 h</span><strong id="change">—</strong></div></div>
+ <div class="row section"><h2>Indicadores (velas 1 min)</h2><span class="muted" id="updated">Esperando datos</span></div>
+ <div class="grid">
+  <div class="price"><span class="muted">EMA 9 / EMA 21</span><strong id="ema">—</strong></div>
+  <div class="price"><span class="muted">RSI 14</span><strong id="rsi">—</strong></div>
+  <div class="price"><span class="muted">MACD (12,26,9)</span><strong id="macd">—</strong></div>
+  <div class="price"><span class="muted">Tendencia</span><strong id="trend">—</strong></div>
+ </div>
+ <canvas id="chart" width="900" height="260"></canvas>
+ <div class="row section"><h2>Señal del sistema</h2><span id="signal" class="signal blue">ESPERANDO</span></div>
+ <p class="note" id="reason">Conectando con datos públicos del mercado…</p>
+ <div class="actions"><button class="primary" id="refresh">Actualizar ahora</button><button id="reset">Reiniciar simulación</button></div>
+</section>
+<section class="card section">
+ <h2>Simulador de operaciones</h2>
+ <div class="grid">
+  <div><div class="muted">Stop Loss</div><div class="metric">−0.30%</div></div>
+  <div><div class="muted">Take Profit 1</div><div class="metric">+1.80%</div></div>
+  <div><div class="muted">Take Profit 2</div><div class="metric">+5.00%</div></div>
+  <div><div class="muted">Riesgo máximo</div><div class="metric">0.50%</div></div>
+ </div>
+ <div class="row"><div><div class="muted">Posición actual</div><strong id="position">Sin posición</strong></div><div><div class="muted">P&amp;L flotante</div><strong id="floating">0.00 USDT</strong></div></div>
+ <p class="note">El simulador abre una posición larga cuando se cumplen las condiciones de señal BUY. Cierra automáticamente con SL o TP. TP1 cierra la mitad y TP2 cierra el resto. Las operaciones se evalúan al actualizar el precio.</p>
+ <div class="row section"><h2>Historial</h2><span class="muted" id="count">0 registros</span></div>
+ <div style="overflow-x:auto"><table><thead><tr><th>Activo</th><th>Entrada/salida</th><th>Resultado</th><th>Motivo</th></tr></thead><tbody id="history"><tr><td colspan="4" class="muted">Todavía no hay operaciones</td></tr></tbody></table></div>
+</section>
+<p class="note section">Aviso: herramienta educativa de simulación. No es asesoramiento financiero ni una IA entrenada. Usa datos públicos y operaciones ficticias; no conecta billeteras ni envía órdenes reales. Los resultados no incluyen comisiones, spread ni deslizamiento.</p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+let balance=1000, realized=0, closed=0, wins=0, pos=null, history=[], busy=false, lastPrice=null, market={};
+const fmt=n=>Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct=n=>(n>=0?'+':'')+n.toFixed(2)+'%';
+function ema(a,p){let k=2/(p+1),v=a[0];for(let i=1;i<a.length;i++)v=a[i]*k+v*(1-k);return v}
+function rsi(a,p=14){let g=0,l=0;for(let i=a.length-p;i<a.length;i++){let d=a[i]-a[i-1];if(d>0)g+=d;else l-=d}if(l===0)return 100;return 100-100/(1+(g/p)/(l/p))}
+function macd(a){let line=[];for(let i=25;i<a.length;i++)line.push(ema(a.slice(0,i+1),12)-ema(a.slice(0,i+1),26));let sig=ema(line.slice(-30),9);return {line:line.at(-1),sig}}
+function draw(a){let c=$('chart'),x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);if(!a.length)return;let lo=Math.min(...a),hi=Math.max(...a),span=hi-lo||1;x.strokeStyle='#263e5e';x.lineWidth=1;for(let j=1;j<4;j++){x.beginPath();x.moveTo(0,h*j/4);x.lineTo(w,h*j/4);x.stroke()}x.strokeStyle='#79b4ff';x.lineWidth=3;x.beginPath();a.forEach((v,i)=>{let px=i*w/(a.length-1),py=h-12-(v-lo)/span*(h-24);i?x.lineTo(px,py):x.moveTo(px,py)});x.stroke()}
+function setStatus(s,ok=false){$('status').textContent=s;$('status').style.color=ok?'#3bd69a':'#ffb1b9'}
+async function fetchData(){if(busy)return;busy=true;$('refresh').disabled=true;try{let sym=$('asset').value,base='https://api.binance.com/api/v3/';let [kr,tk]=await Promise.all([fetch(base+'klines?symbol='+sym+'&interval=1m&limit=100',{cache:'no-store'}),fetch(base+'ticker/24hr?symbol='+sym,{cache:'no-store'})]);if(!kr.ok||!tk.ok)throw Error('El proveedor de datos respondió '+kr.status+' / '+tk.status);let kl=await kr.json(),t=await tk.json(),cl=kl.map(k=>+k[4]),p=+t.lastPrice;if(!Number.isFinite(p)||cl.length<30)throw Error('Datos incompletos del mercado');let e9=ema(cl.slice(-50),9),e21=ema(cl.slice(-50),21),rv=rsi(cl),m=macd(cl),up=e9>e21,trend=up?'ALCISTA':'BAJISTA';let buy=up&&rv>50&&rv<70&&m.line>m.sig,sell=!up&&rv<50&&m.line<m.sig;let sig=buy?'BUY':sell?'SELL':'WAIT';market={sym,p,e9,e21,rv,m,trend,sig,cl};lastPrice=p;
+$('price').textContent=fmt(p)+' USDT';$('change').textContent=pct(+t.priceChangePercent);$('change').className=+t.priceChangePercent>=0?'green':'red';$('ema').textContent=fmt(e9)+' / '+fmt(e21);$('rsi').textContent=rv.toFixed(1);$('macd').textContent=fmt(m.line)+' / '+fmt(m.sig);$('trend').textContent=trend;$('trend').className=up?'green':'red';$('signal').textContent=sig;$('signal').className='signal '+(buy?'green':sell?'red':'blue');$('reason').textContent=buy?'EMA 9 > EMA 21, RSI en zona de impulso y MACD positivo frente a su señal.':sell?'Tendencia bajista y MACD por debajo de su señal. El simulador no abre cortos.':'No se cumplen todas las condiciones de entrada. El sistema espera.';draw(cl.slice(-70));$('updated').textContent='Actualizado '+new Date().toLocaleTimeString();setStatus('CONECTADO',true);managePosition(p);if(buy&&!pos)openPosition(p);render();
+}catch(e){setStatus('SIN CONECTAR');$('updated').textContent='Error de conexión';$('reason').textContent='No se pudieron cargar datos: '+e.message+'. Prueba de nuevo o abre la app en Safari con internet.';}finally{busy=false;$('refresh').disabled=false}}
+function openPosition(p){let risk=balance*.005,qty=Math.min(balance/p,risk/(p*.003));if(qty<=0)return;pos={sym:market.sym,entry:p,qty,initialQty:qty,partial:false,pnl:0};$('reason').textContent+=' Se abrió una operación ficticia.';render()}
+function finish(qty,price,why){if(!pos)return;let pnl=(price-pos.entry)*qty;balance+=pnl;realized+=pnl;pos.pnl+=pnl;pos.qty-=qty;if(why==='TP1'){pos.partial=true;return}closed++;if(pos.pnl>0)wins++;history.unshift({sym:pos.sym,entry:pos.entry,exit:price,pnl:pos.pnl,why});pos=null}
+function managePosition(p){if(!pos)return;let change=(p-pos.entry)/pos.entry*100;if(change<=-.30)finish(pos.qty,p,'STOP');else if(change>=5)finish(pos.qty,p,'TP2');else if(change>=1.8&&!pos.partial)finish(pos.qty/2,p,'TP1')}
+function render(){$('balance').textContent=fmt(balance)+' USDT';$('realized').textContent=(realized>=0?'+':'')+fmt(realized)+' USDT';$('closed').textContent=closed;$('wins').textContent='Aciertos: '+(closed?Math.round(wins/closed*100)+'%':'—');$('position').textContent=pos?pos.sym+' · Entrada '+fmt(pos.entry)+' · Cantidad '+pos.qty.toFixed(5):'Sin posición';let fl=pos&&lastPrice?(lastPrice-pos.entry)*pos.qty:0;$('floating').textContent=(fl>=0?'+':'')+fmt(fl)+' USDT';$('floating').className=fl>=0?'green':'red';$('count').textContent=history.length+' registros';$('history').innerHTML=history.length?history.map(h=>`<tr><td>${h.sym.replace('USDT','')}</td><td>${fmt(h.entry)} → ${fmt(h.exit)}</td><td class="${h.pnl>=0?'green':'red'}">${h.pnl>=0?'+':''}${fmt(h.pnl)}</td><td>${h.why}</td></tr>`).join(''):'<tr><td colspan="4" class="muted">Todavía no hay operaciones cerradas</td></tr>'}
+$('refresh').addEventListener('click',fetchData);$('asset').addEventListener('change',()=>{pos=null;fetchData()});$('reset').addEventListener('click',()=>{balance=1000;realized=0;closed=0;wins=0;pos=null;history=[];render();fetchData()});render();fetchData();setInterval(fetchData,15000);
+</script></body></html>
